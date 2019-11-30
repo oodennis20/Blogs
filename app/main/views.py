@@ -1,5 +1,5 @@
 from flask import render_template
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,abort,flash
 from flask_login import login_required,current_user
 from ..models import *
 from . import main
@@ -54,3 +54,47 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+# add admin dashboard view
+@main.route('/admin/dashboard')
+@login_required
+def admin_dashboard():
+    # prevent non-admins from accessing the page
+    if not current_user.is_admin:
+        abort(403)
+
+    return render_template('admin_dashboard.html', title="Dashboard")
+
+@main.route('/blog/', methods = ['GET','POST'])
+@login_required
+def new_blog():
+
+    form = BlogForm()
+
+    if form.validate_on_submit():
+        topic = form.topi.data
+        content= form.content.data
+        title=form.title.data
+
+        # Updated bloginstance
+        new_blog = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+
+        title='New Blog'
+
+        new_blog.save_blog()
+
+        return redirect(url_for('main.index'))
+
+    return render_template('blog.html',blog_entry= form)
+
+
+
+
+
+
+
+
+
+
+
+
