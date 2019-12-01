@@ -14,10 +14,9 @@
             <small><i>{{ blogpost.author }} Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
             <hr>
 
-            {% if admin == current_user %}
-            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete  True</button>
+            
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
       
-            {% endif %}
 
             <div style="width: 50%">
                 {{wtf.quick_form(blogpost_form)}}
@@ -28,8 +27,7 @@
             <!-- Nested media object -->
 
             <div class="media-left">
-                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairBun&accessoriesType=Prescription01&hairColor=SilverGray&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Close&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=DarkBrown"
-                    class="media-object" style="width:45px">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black" class="media-object" style="width:60px">
             </div>
 
             <div class="media-body">
