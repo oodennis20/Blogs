@@ -4,31 +4,35 @@
 {% block content %}
 
 <body>
-    <div class="jumbotron" style="background-image: url('{{ url_for('static', filename='./photos/two.jpeg') }}')">
-        <div class="container text-center" id="landing">
+
+    <div class="jumbotron text-center" id="landing" style="background-image: url('{{ url_for('static', filename='./photos/two.jpeg') }}')">
+        
             <h1>
-                <stron>Blog World</stron>
+                <strong>Blog World</strong>
             </h1><br>
             <small>
                 <h4>Be open and express yourself..</h4>
             </small>
             <button type="button" class="btn btn-default">Learn More</button>
-        </div>
+        
     </div>
+
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             {% for blog in blogs %}
             <div class="preview">
                     <a href="blog/{{ blog.id }}">
                 <h2 class="title">{{ blog.title }}</h2>
-                <p class="post-meta">Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+                <p>{{ blog.content}}</p>
+                <small><p><a href="blog/new/{{ blog.id }}">View Comments</p></a></small>
+                <p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
             </div>
             {% endfor %}
             <hr>
         </div>
     </div>
 
-    </div>
+
 
     <!-- Footer -->
     <footer>
