@@ -20,8 +20,7 @@ class User(UserMixin,db.Model):
     blogpost = db.relationship('Blogs', backref='author', lazy='dynamic')
     comments = db.relationship('Comments', backref='author', lazy='dynamic')
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    is_admin = db.Column(db.Boolean, default=False)
-
+   
 
 #to link tables what you add after backref matters
     @property
@@ -114,10 +113,6 @@ class Subscriber(UserMixin, db.Model):
 
     def __repr__(self):
         return f'User {self.email}'
-
-
-
-
 
 
 

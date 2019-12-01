@@ -1,21 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
+
+<div class="jumbotron text-center">
+  <h1 class="display-2">Blog World</h1><br>
+  <small><h4>Be open and express yourself..</h4></small>
+  <div class="btn-group mt-2" role="group" aria-label="Basic example">
+  <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a>
+  </div>
+  </div>
+<div class="container">
+  <div style="width: 60%; height:50%">
+
+<h2>Subscibe to Blog World</h2>
 <br>
+  {{ wtf.quick_form(subscriber_form) }}
 
-  <div class="container">
-   <div class="card border-secondary mb-3" style="max-width: 18rem;">
-   <div class="card-header"><h5>Welcome to Blog World</h5>
 
-  </div>
-
-   <div class="card-body text-secondary">
-
-    <p class="card-text">Hope you enjoy!</p>
-
-   <br>
-  </div>
-            <footer class="blockquote-footer">
-                <cite title="Source Title">Posted by Admin</cite></footer>
 </div>
+
+</div>
+
 {% endblock %}
-</div>

@@ -59,18 +59,6 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
-# add admin dashboard view
-@main.route('/admin/dashboard')
-@login_required
-def admin_dashboard():
-    # prevent non-admins from accessing the page
-    if not current_user.is_admin:
-        abort(403)
-
-    blogposts = Blogs.query.all()
-
-    return render_template('admin_dashboard.html', title="Dashboard",blogposts=blogposts)
-
 @main.route('/blog/', methods = ['GET','POST'])
 @login_required
 def new_blog():
@@ -78,22 +66,24 @@ def new_blog():
     form = BlogForm()
 
     if form.validate_on_submit():
+
         topic = form.topic.data
-        content= form.content.data
-        title=form.title.data
+        content = form.content.data
+        title =form.title.data
 
         # Updated bloginstance
         blogpost = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
-        db,session.add(blogpost)
+
+        db.session.add(blogpost)
         db.session.commit()
-        
+
         title='New Blog'
 
         subscriber = Subscriber.query.all()
-        for email in subscriber:
-            mail_message("New Blog Post from Blog World","email/postnotification",email.email,subscriber=subscriber)
-            
-    return redirect(url_for('main.single_blog',id=blogpost.id))
+        # for email in subscriber:
+        #     mail_message("New Blog Post from Blog World","email/postnotification",email.email,subscriber=subscriber)
+
+        return redirect(url_for('main.single_blog',id=blogpost.id))
 
     return render_template('blog.html',blogpost_form= form)
 
@@ -115,22 +105,24 @@ def blogpost_list():
     return render_template('blogposts.html', blogposts=blogposts)
 
 
-# VIEWING comments and respective posts
-@main.route('/blog/new/<int:id>/',methods=["GET","POST"])
+# viewing comments and respective posts
+@main.route('/blog/new/<int:blogs_id>/',methods=["GET","POST"])
+
 def blogpost(blogs_id):
-    blogpost = Blogs.query.get(id)
+    blogpost = Blogs.query.filter_by(id=blogs_id).first()
     form = CommentForm()
     if form.validate_on_submit():
-        title = form.title.data
+
         comment = form.comment.data
-        new_blogpost_comment = Comments(comment=comment,blogs=blogs_id)
-       
+        new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id)
+
         db.session.add(new_blogpost_comment)
         db.session.commit()
-        
+
     comments = Comments.get_comment(blogs_id)
-    
-    return render_template('blogcommentlink.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
+
+    return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
+
 
 @main.route('/blog/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -138,8 +130,6 @@ def delete_blog(id):
     """
     Delete a blogpost from the database
     """
-    if not current_user.is_admin:
-        abort(403)
 
     blogpost = Blogs.query.filter_by(id=id).first()
 

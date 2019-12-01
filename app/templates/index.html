@@ -14,16 +14,17 @@
                     <h4>Be open and express yourself..</h4>
                 </small>
                 <div class="btn-group mt-2" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a>
-                </div>
+                    <a class="btn btn-primary btn-lg" href="/blog">Post a blog</a></div>
+                    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a></div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 {% for blog in blogs %}
                 <div class="preview">
-                    <a href="blog/new{{ blog.id }}">
-                        <h2 class="title">{{ blog.title }}</h2>
+                    <a href="blog/new/{{ blog.id }}">
+                        <h2 class="title">{{ blog.title }}</h2></a>
                         <p>{{ blog.topic }}</p>
                         <p>{{ blog.content}}</p>
                         <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small>
