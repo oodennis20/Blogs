@@ -89,9 +89,10 @@ def new_blog():
         
         title='New Blog'
 
-        # 
-        print('yeaaahhh!!')
-
+        subscriber = Subscriber.query.all()
+        for email in subscriber:
+            mail_message("New Blog Post from Blog World","email/postnotification",email.email,subscriber=subscriber)
+            
     return redirect(url_for('main.single_blog',id=blogpost.id))
 
     return render_template('blog.html',blogpost_form= form)
