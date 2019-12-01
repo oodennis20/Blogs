@@ -1,39 +1,51 @@
 {% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
-<br>
-<br>
+
+<div class="jumbotron text-center">
+    <h1 class="display-2"><strong>Blog WOrld</strong></h1><br>
+    <small>
+        <h4>Be open and express yourself..</h4>
+    </small>
+    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+        <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a>
+    </div>
+</div>
 <div class="container">
     <div class="media">
         <div class="media-left">
             <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black"
-                class="media-object" style="width:45px">
+                class="media-object" style="width:60px">
+
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ blogpost.title }} </h4>
             <h5 class="media-heading">{{ blogpost.topic }} </h5>
             <p>{{ blogpost.content }}</p>
-            <small><i>{{ blogpost.author }} Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
+            <small><i>Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
             <hr>
 
-            
-            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-      
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
+                data-target="#deleteModal">Delete</button>
 
             <div style="width: 50%">
                 {{wtf.quick_form(blogpost_form)}}
             </div>
             <br>
-
-            {% for comment in comments%}
+            {% for comment in comments[::-1] %}
             <!-- Nested media object -->
 
             <div class="media-left">
-                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black" class="media-object" style="width:60px">
-            </div>
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairBun&accessoriesType=Prescription01&hairColor=SilverGray&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Close&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=DarkBrown"
+                    class="media-object" style="width:45px">
 
+            </div>
             <div class="media-body">
                 <p>{{ comment.comment }}</p>
+
                 <small><i>{{ comment.author }} Posted on {{ comment.date_posted.strftime('%B %d, %Y') }}</i></small>
-               
+                <br>
+
+                <a href="{{ url_for('main.delete_comment',blogs_id=blogpost.id ) }}">
+                    <i class="fa fa-pencil"></i> Delete</a>
                 {% endfor %}
                 <!-- delete blog modal -->
                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
@@ -53,11 +65,11 @@
                                 </form>
                             </div>
                         </div>
+                        <br>
+                        {% endblock content %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
-{% endblock content %}
