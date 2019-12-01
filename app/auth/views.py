@@ -37,8 +37,6 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Welcome to Blog World!","email/welcome_user",user.email,user=user)
-
         title = "New Account"
 
         return redirect(url_for('auth.login'))

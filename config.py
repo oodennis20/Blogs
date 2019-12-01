@@ -12,7 +12,8 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME='bts.clyde@gmail.com'
     MAIL_PASSWORD='parapon8'
-   
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
     @staticmethod
     def init_app(app):
