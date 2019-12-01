@@ -8,7 +8,7 @@ class UpdateProfile(FlaskForm):
     
 class BlogForm(FlaskForm):
     title = StringField('Blog Title')
-    topic = StringField(u'Topic')
+    topic = StringField('Topic')
     blog = TextAreaField('Blog Content') 
     submit = SubmitField('Submit')
 

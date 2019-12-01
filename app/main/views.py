@@ -92,13 +92,13 @@ def new_blog():
 
     return render_template('blog.html',blogpost_form= form)
 
-# #ability to view single blog post
-# @main.route('/blog/<int:id>')
-# def single_blog(id):
+#ability to view single blog post
+@main.route('/blog/<int:id>')
+def single_blog(id):
     
-#     blogpost = Blogs.query.get(id)
+    blogpost = Blogs.query.get(id)
 
-#     return render_template('oneblogpost.html',blogpost=blogpost)
+    return render_template('oneblogpost.html',blogpost=blogpost)
 
 
 @main.route('/blogposts')
@@ -112,43 +112,54 @@ def blogpost_list():
 
 # VIEWING comments and respective posts
 @main.route('/blog/new/<int:id>/',methods=["GET","POST"])
-def blogpost(id):
+def blogpost(blogs_id):
     blogpost = Blogs.query.get(id)
     form = CommentForm()
     if form.validate_on_submit():
         title = form.title.data
         comment = form.comment.data
         new_blogpost_comment = Comments(comment=comment,blogs=blogs_id,user=current_user.id)
-        # new_post_comment.save_post_comments()
+       
         db.session.add(new_blogpost_comment)
         db.session.commit()
-    comments = Comments.query.all()
+        
+    comments = Comments.get_comment(blogs_id)
+    
     return render_template('blogcommentlink.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
 
-# colllectng new comments on blogposts
-@main.route('/blog/comment/<int:id>', methods = ['GET','POST'])
+@main.route('/blog/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
-def new_comment(id):
-    '''
-    view category that returns a form to create a new comment
-    '''
-    form = CommentForm()
-    blogpost = Blogs.query.filter_by(id = id).first()
+def delete_blog(id):
+    blogpost = Blogs.query.get_or_404(id)
+    for comment in blogs.comments.all():
+        db.session.delete(comment)
+        db.session.commit()
+    if post.author != is_admin:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('admin_dashboard.html'))
 
-    if form.validate_on_submit():
 
-        comment = form.comment.data
 
-        # comment instance
-        new_comment = Comments(blogs_id = id, comment = comment)
 
-        # save comment
-        new_comment.save_comment()
 
-        return redirect(url_for('main.blogpost', id = blogpost.id ))
 
-    title = f'{blogpost.title} comment'
-    return render_template('newcomment.html', title = title, comment_form = form, blogpost = blogpost, )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

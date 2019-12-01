@@ -4,17 +4,19 @@
 {% block content %}
 
 <body>
-    <div class="container-fluid"> 
-        <div class="jumbotron text-center"  id="landing">
-            <h1>
-                <strong>Blog World</strong>
-            </h1><br>
-            <small>
-                <h4>Be open and express yourself..</h4>
-            </small>
-            <button type="button" class="btn btn-default">Learn More</button>
+    <div class="container-fluid">
+        <div style="background-image:url('./Documents/Blogs/app/static/photos/two.jpeg'); margin-left: -25%; margin-right: -1.2%; height:280px">
+            <div class=" text-center"  id="landing" style="margin-left: 20%;">
+                <br>
+                <br>
+                
+                <h1><strong>Blog World</strong></h1><br>
+                <small>
+                    <h4>Be open and express yourself..</h4>
+                </small>
+                <button type="button" class="btn btn-default">Learn More</button>
+            </div>
         </div>
-    
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             {% for blog in blogs %}
