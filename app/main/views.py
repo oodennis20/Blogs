@@ -65,7 +65,9 @@ def admin_dashboard():
     if not current_user.is_admin:
         abort(403)
 
-    return render_template('admin_dashboard.html', title="Dashboard")
+    blogposts = Blogs.query.all()
+
+    return render_template('admin_dashboard.html', title="Dashboard",blogposts=blogposts)
 
 @main.route('/blog/', methods = ['GET','POST'])
 @login_required
@@ -118,7 +120,7 @@ def blogpost(blogs_id):
     if form.validate_on_submit():
         title = form.title.data
         comment = form.comment.data
-        new_blogpost_comment = Comments(comment=comment,blogs=blogs_id,user=current_user.id)
+        new_blogpost_comment = Comments(comment=comment,blogs=blogs_id)
        
         db.session.add(new_blogpost_comment)
         db.session.commit()
@@ -143,6 +145,39 @@ def delete_blog(id):
 
     return render_template('index.html', title="Dashboard")
 
+
+@main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_blogpost(id):
+    """
+    Edit a blogpost in the database
+    """
+
+    if not current_user.is_admin:
+        abort(403)
+        
+    blogpost = Blogs.query.get(id)
+    form = BlogForm()
+
+    if form.validate_on_submit():
+
+        blogpost.topic = form.topic.data
+        blogpost.content = form.content.data
+        blogpost.title =form.title.data
+
+        # Updated bloginstance
+        db.session.add(blogpost)
+        db.session.commit()
+
+        title='New Blog'
+
+        return redirect(url_for('main.single_blog',id=blogpost.id))
+
+    form.title.data = blogpost.title
+    form.content.data = blogpost.content
+    form.topic.data= blogpost.topic
+    
+    return render_template('blog.html',action="Edit", blogpost_form= form, legend='Update Post')
 
 
 

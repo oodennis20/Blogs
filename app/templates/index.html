@@ -9,7 +9,6 @@
             <div class=" text-center"  id="landing" style="margin-left: 20%;">
                 <br>
                 <br>
-                
                 <h1><strong>Blog World</strong></h1><br>
                 <small>
                     <h4>Be open and express yourself..</h4>
@@ -27,6 +26,7 @@
                 <p>{{ blog.content}}</p>
                <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
             </div>
+            <hr>
             {% endfor %}
             <hr>
         </div>
