@@ -2,25 +2,29 @@
 
 {% block navbar%}
 
-    {% include 'navbar.html' %}
+{% include 'navbar.html' %}
 
 {% endblock %}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
- <head>
-   <meta charset="utf-8">
-   {% if title %}
-   <title>{{ title }}</title>
-   {% else %}
-   <title>Blog World! </title>
-   {% endif %}
- </head>
- <body>
 
-   {% block content %}
+<head>
+  <meta charset="utf-8">
+  {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Blog World! </title>
+  {% endif %}
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+</head>
 
-   {% endblock %}
+<body>
 
- </body>
+  {% block content %}
+
+  {% endblock %}
+
+</body>
+
 </html>

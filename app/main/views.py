@@ -12,8 +12,10 @@ def index():
     my index page
     return
     '''
+    blogs = Blogs.query.order_by(Blogs.date.desc()).all()
+    
     title= "Blog World"
-    return render_template('index.html',title=title)
+    return render_template('index.html',title=title,blogs=blogs)
 
 @main.route('/user/<uname>')
 def profile(uname):
