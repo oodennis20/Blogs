@@ -2,7 +2,7 @@ import os
 
 
 class Config:
-    SECRET_KEY=os.environ.get('SECRET_KEY')
+    SECRET_KEY='parapon8'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://clyde:parapon8@localhost/blogs'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
@@ -10,8 +10,8 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME=os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME='bts.clyde@gmail.com'
+    MAIL_PASSWORD='parapon8'
    
 
     @staticmethod
