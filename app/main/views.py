@@ -92,13 +92,13 @@ def new_blog():
 
     return render_template('blog.html',blogpost_form= form)
 
-#ability to view single blog post
-@main.route('/blog/<int:id>')
-def single_blog(id):
+# #ability to view single blog post
+# @main.route('/blog/<int:id>')
+# def single_blog(id):
     
-    blogpost = Blogs.query.get(id)
+#     blogpost = Blogs.query.get(id)
 
-    return render_template('oneblogpost.html',blogpost=blogpost)
+#     return render_template('oneblogpost.html',blogpost=blogpost)
 
 
 @main.route('/blogposts')

@@ -4,9 +4,8 @@
 {% block content %}
 
 <body>
-
-    <div class="jumbotron text-center" id="landing" style="background-image: url('{{ url_for('static', filename='./photos/two.jpeg') }}')">
-        
+    <div class="container-fluid"> 
+        <div class="jumbotron text-center"  id="landing">
             <h1>
                 <strong>Blog World</strong>
             </h1><br>
@@ -14,24 +13,23 @@
                 <h4>Be open and express yourself..</h4>
             </small>
             <button type="button" class="btn btn-default">Learn More</button>
-        
-    </div>
-
+        </div>
+    
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             {% for blog in blogs %}
             <div class="preview">
-                    <a href="blog/{{ blog.id }}">
+                <a href="blog/new{{ blog.id }}">
                 <h2 class="title">{{ blog.title }}</h2>
+                <p>{{ blog.topic }}</p>
                 <p>{{ blog.content}}</p>
-                <small><p><a href="blog/new/{{ blog.id }}">View Comments</p></a></small>
-                <p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+               <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
             </div>
             {% endfor %}
             <hr>
         </div>
     </div>
-
+    </div>
 
 
     <!-- Footer -->
@@ -39,7 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <p class="copyright text-muted">Copyright &copy; Blog World 2019</p>
+                    <p class="copyright text-muted">Copyright &copy; Blog World 2019</p></small>
                 </div>
             </div>
         </div>

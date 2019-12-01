@@ -4,7 +4,7 @@
 <div class="container">
     <div class="media">
         <div class="media-left">
-            <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black"class="media-object" style="width:45px">
+            <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black"    class="media-object" style="width:45px">
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ blogpost.title }} </h4>
@@ -12,9 +12,11 @@
             <p>{{ blogpost.content }}</p>
             <small><i>{{ blogpost.author }} Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
             <hr>
-            {{wtf.quick_form(blogpost_form)}}
+            <div style="width: 50%">
+                {{wtf.quick_form(blogpost_form)}}
+            </div>
             <br>
-            {% for comment in comments[::-1] %}
+            {% for comment in comments%}
             <!-- Nested media object -->
 
             <div class="media-left">
