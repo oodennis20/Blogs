@@ -2,6 +2,7 @@ from flask import render_template
 from flask import render_template,request,redirect,url_for,abort,flash
 from flask_login import login_required,current_user
 from ..email import mail_message
+from ..request import get_quote
 from ..models import *
 from . import main
 from .. import db,photos
@@ -17,7 +18,9 @@ def index():
     blogs = Blogs.query.order_by(Blogs.date.desc()).all()
     
     title= "Blog World"
-    return render_template('index.html',title=title,blogs=blogs)
+    name = "Quote"
+    quote = get_quote()
+    return render_template('index.html',title=title,blogs=blogs,quote=quote)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -136,7 +139,7 @@ def delete_blog(id):
     db.session.delete(blogpost)
     db.session.commit()
 
-    return render_template('index.html', title="Dashboard")
+    return render_template('index.html',title="Dashboard")
 
 
 @main.route('/blog/edit/<int:id>', methods=['GET', 'POST'])
@@ -201,7 +204,7 @@ def subscriber():
    
    blog = Blogs.query.all()
    
-   return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
+   return render_template('subscriber.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
 
 
 

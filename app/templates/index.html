@@ -19,6 +19,17 @@
                     <a class="btn btn-primary btn-lg" href="/subscribe">Subscribe</a></div>
             </div>
         </div>
+        <!-- random quotes -->
+        <div id="left-cards" style="display: block !important; margin-left: 38%;">
+            <div class="card" style="width: 20rem; margin-bottom: 30px;">
+              <div class="card-body">
+                <h5 class="card-title text-center">Best Quotes</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Inspiring</h6>
+                <p class="card-text">{{quote.quote}}</p>
+                <h6 class="card-subtitle mb-2 text-muted"><i><i>~ {{quote.author}}</i></i></h6>
+              </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 {% for blog in blogs %}

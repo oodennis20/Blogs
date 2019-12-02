@@ -5,7 +5,7 @@ class Config:
     SECRET_KEY='parapon8'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://clyde:parapon8@localhost/blogs'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-
+    
 #  email configurations
     MAIL_SERVER='smtp.googlemail.com'
     MAIL_PORT = 587
